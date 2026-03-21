@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --bg-color: #0a0a0a;
   --calc-bg: #1a1a1a;
@@ -24,8 +25,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh; /* Mudado de height para min-height para evitar cortes em telas pequenas */
   margin: 0;
+  padding: 20px; /* Adicionado para não colar nas bordas do celular */
+  box-sizing: border-box;
   transition: all 0.3s ease;
 }
 
@@ -42,6 +45,7 @@ body {
   font-weight: bold;
   border-radius: 5px;
   text-transform: uppercase;
+  transition: 0.3s;
 }
 
 .calculator {
@@ -49,18 +53,20 @@ body {
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-  width: 320px;
+  width: 100%; /* Ocupa a largura disponível */
+  max-width: 350px; /* Mas não passa de 350px no PC */
   border: 2px solid var(--accent-color);
+  box-sizing: border-box;
 }
 
 .display input {
   width: 100%;
-  height: 60px;
+  height: 70px; /* Aumentado levemente para melhor leitura */
   background: var(--display-bg);
   border: none;
   color: var(--accent-color);
   text-align: right;
-  font-size: 2rem;
+  font-size: 2.2rem;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
@@ -76,14 +82,17 @@ body {
 }
 
 .btn {
-  padding: 20px;
-  font-size: 1.2rem;
+  padding: 20px 10px;
+  font-size: 1.3rem;
   border: none;
   border-radius: 8px;
   background: var(--btn-bg);
   color: var(--text-color);
   cursor: pointer;
   transition: transform 0.1s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:active {
@@ -109,9 +118,39 @@ footer {
   margin-top: 30px;
   font-size: 0.9rem;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 footer strong {
   color: var(--accent-color);
   text-transform: uppercase;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDADE --- */
+/* Celulares Médios e Pequenos */
+@media (max-width: 480px) {
+  .calculator {
+    padding: 15px;
+  }
+  .display input {
+    font-size: 1.8rem;
+    height: 60px;
+  }
+  .btn {
+    padding: 15px 5px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+  .buttons {
+    gap: 8px;
+  }
+}
+/* Celulares muito pequenos (iPhone SE / Relógios) */
+@media (max-width: 320px) {
+  .display input {
+    font-size: 1.5rem;
+  }
+  .btn {
+    padding: 12px 2px;
+  }
 }/*# sourceMappingURL=style.css.map */

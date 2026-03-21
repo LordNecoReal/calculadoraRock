@@ -2,34 +2,28 @@ const display = document.getElementById('result');
 const themeBtn = document.getElementById('theme-btn');
 const html = document.documentElement;
 
-// Configuração do Áudio (Som de Rock/Metal)
-const clickSound = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3'); // Som de clique seco
-const heavySound = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3'); // Som mais forte para o '='
+// Sons (Links externos funcionais)
+const clickSound = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
+const equalSound = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
 
-function playRockSound(isEqual = false) {
-    if (isEqual) {
-        heavySound.currentTime = 0;
-        heavySound.play();
-    } else {
-        clickSound.currentTime = 0; // Reinicia o som para permitir cliques rápidos
-        clickSound.play();
-    }
+function playSound(isEqual = false) {
+    const sfx = isEqual ? equalSound : clickSound;
+    sfx.currentTime = 0;
+    sfx.play();
 }
 
-// --- FUNÇÕES DA CALCULADORA ---
-
 function appendToDisplay(input) {
-    playRockSound();
+    playSound();
     display.value += input;
 }
 
 function clearDisplay() {
-    playRockSound();
+    playSound();
     display.value = "";
 }
 
 function deleteLast() {
-    playRockSound();
+    playSound();
     display.value = display.value.slice(0, -1);
 }
 
@@ -37,7 +31,7 @@ function calculate() {
     try {
         let expression = display.value.replace(/%/g, '/100');
         if (expression) {
-            playRockSound(true); // Som diferenciado para o resultado
+            playSound(true);
             display.value = eval(expression);
         }
     } catch (error) {
@@ -46,45 +40,38 @@ function calculate() {
     }
 }
 
-// --- INTERAÇÃO COM O TECLADO E FEEDBACK VISUAL ---
+// Atalhos de Teclado
+document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    let btn;
 
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    let buttonToHighlight = null;
-
-    // Mapeamento de teclas para encontrar o botão na tela e brilhar
-    const buttons = Array.from(document.querySelectorAll('.btn'));
-    
-    if (/[0-9]/.test(key)) {
-        buttonToHighlight = buttons.find(b => b.innerText === key);
+    if (/[0-9\+\-\*\/\.\%]/.test(key)) {
+        const map = {'*': '×'};
+        const searchText = map[key] || key;
+        btn = Array.from(document.querySelectorAll('.btn')).find(b => b.innerText === searchText);
         appendToDisplay(key);
-    } else if (['+', '-', '*', '/', '.', '%'].includes(key)) {
-        buttonToHighlight = buttons.find(b => b.innerText === (key === '*' ? '×' : key));
-        appendToDisplay(key);
-    } else if (key === 'Enter' || key === '=') {
-        event.preventDefault();
-        buttonToHighlight = document.querySelector('.equal');
+    } else if (key === 'Enter') {
+        e.preventDefault();
+        btn = document.querySelector('.equal');
         calculate();
     } else if (key === 'Backspace') {
-        buttonToHighlight = buttons.find(b => b.innerText === 'DEL');
+        btn = Array.from(document.querySelectorAll('.btn')).find(b => b.innerText === 'DEL');
         deleteLast();
     } else if (key === 'Escape') {
-        buttonToHighlight = document.querySelector('.clear');
+        btn = document.querySelector('.clear');
         clearDisplay();
     }
 
-    // Adiciona efeito visual temporário
-    if (buttonToHighlight) {
-        buttonToHighlight.classList.add('active-press');
-        setTimeout(() => buttonToHighlight.classList.remove('active-press'), 100);
+    if (btn) {
+        btn.classList.add('active-press');
+        setTimeout(() => btn.classList.remove('active-press'), 100);
     }
 });
 
-// --- TROCA DE TEMA ---
+// Troca de Tema
 themeBtn.addEventListener('click', () => {
-    playRockSound();
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', newTheme);
-    themeBtn.innerText = newTheme === 'dark' ? "Modo Heavy ativado🤘" : "Modo Rock ativado 🎸";
+    playSound();
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeBtn.innerText = isDark ? "Modo rock ativado 🎸" : "Modo Heavy ativado🤘";
 });

@@ -1,117 +1,161 @@
 :root {
-    --bg-color: #0a0a0a;
-    --calc-bg: #1a1a1a;
-    --text-color: #f1f1f1;
-    --accent-color: #e63946; /* Vermelho Rock */
-    --btn-bg: #2d2d2d;
-    --display-bg: #111;
+  --bg-color: #0a0a0a;
+  --calc-bg: #1a1a1a;
+  --text-color: #f1f1f1;
+  --accent-color: #e63946; /* Vermelho Rock */
+  --btn-bg: #2d2d2d;
+  --display-bg: #111;
 }
 
-[data-theme="light"] {
-    --bg-color: #e0e0e0;
-    --calc-bg: #ffffff;
-    --text-color: #1a1a1a;
-    --accent-color: #7209b7; /* Roxo vibrante para o light mode */
-    --btn-bg: #d1d1d1;
-    --display-bg: #f8f8f8;
+[data-theme=light] {
+  --bg-color: #e0e0e0;
+  --calc-bg: #ffffff;
+  --text-color: #1a1a1a;
+  --accent-color: #7209b7; /* Roxo vibrante para o light mode */
+  --btn-bg: #d1d1d1;
+  --display-bg: #f8f8f8;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    transition: all 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Mudado de height para min-height para evitar cortes em telas pequenas */
+  margin: 0;
+  padding: 20px; /* Adicionado para não colar nas bordas do celular */
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .theme-toggle {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #theme-btn {
-    padding: 10px 20px;
-    cursor: pointer;
-    background: var(--accent-color);
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: 0.3s;
 }
 
 .calculator {
-    background-color: var(--calc-bg);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-    width: 320px;
-    border: 2px solid var(--accent-color);
+  background-color: var(--calc-bg);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+  width: 100%; /* Ocupa a largura disponível */
+  max-width: 350px; /* Mas não passa de 350px no PC */
+  border: 2px solid var(--accent-color);
+  box-sizing: border-box;
 }
 
 .display input {
-    width: 100%;
-    height: 60px;
-    background: var(--display-bg);
-    border: none;
-    color: var(--accent-color);
-    text-align: right;
-    font-size: 2rem;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
+  width: 100%;
+  height: 70px; /* Aumentado levemente para melhor leitura */
+  background: var(--display-bg);
+  border: none;
+  color: var(--accent-color);
+  text-align: right;
+  font-size: 2.2rem;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
 }
 
 .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .btn {
-    padding: 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background: var(--btn-bg);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: transform 0.1s, background 0.2s;
+  padding: 20px 10px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 .btn.op {
-    color: var(--accent-color);
-    font-weight: bold;
+  color: var(--accent-color);
+  font-weight: bold;
 }
 
 .btn.clear {
-    background: #444;
+  background: #444;
 }
 
 .btn.equal {
-    grid-column: span 2;
-    background: var(--accent-color);
-    color: white;
+  grid-column: span 2;
+  background: var(--accent-color);
+  color: white;
 }
 
 footer {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 footer strong {
-    color: var(--accent-color);
-    text-transform: uppercase;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDADE --- */
+
+/* Celulares Médios e Pequenos */
+@media (max-width: 480px) {
+  .calculator {
+    padding: 15px;
+  }
+
+  .display input {
+    font-size: 1.8rem;
+    height: 60px;
+  }
+
+  .btn {
+    padding: 15px 5px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+
+  .buttons {
+    gap: 8px;
+  }
+}
+
+/* Celulares muito pequenos (iPhone SE / Relógios) */
+@media (max-width: 320px) {
+  .display input {
+    font-size: 1.5rem;
+  }
+  
+  .btn {
+    padding: 12px 2px;
+  }
 }
