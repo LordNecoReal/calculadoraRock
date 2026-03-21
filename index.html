@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Calc | Lord Neco</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="theme-toggle">
+        <button id="theme-btn">Clique aqui para modo rock <strong>(Light Mode)</strong> ou Metal <strong>(Dark Mode)</strong> 🤘</button>
+    </div>
+
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" disabled placeholder="0">
+        </div>
+        <div class="buttons">
+            <button class="btn clear" onclick="clearDisplay()">AC</button>
+            <button class="btn op" onclick="appendToDisplay('%')">%</button>
+            <button class="btn op" onclick="deleteLast()">DEL</button>
+            <button class="btn op" onclick="appendToDisplay('/')">/</button>
+
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn op" onclick="appendToDisplay('*')">×</button>
+
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn op" onclick="appendToDisplay('-')">-</button>
+
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn op" onclick="appendToDisplay('+')">+</button>
+
+            <button class="btn" onclick="appendToDisplay('0')">0</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+            <button class="btn equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Criado por <strong>Lord Neco</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
