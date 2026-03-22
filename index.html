@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="rock-overlay"></div>
+    <div class="guitar-bg"></div>
 
-    <div class="theme-toggle">
-        <button id="theme-btn">Clique para alterar cor da pagina(Dark e Light mode versão rock)🤘</button>
+    <div class="controls">
+        <button id="theme-btn">Rock/Metal Mode clique aqui 🤘</button>
+        <button id="open-tutorial">Tutorial Rápido 📖</button>
     </div>
 
     <div class="calculator">
@@ -40,6 +43,19 @@
             <button class="btn" onclick="appendToDisplay('0')">0</button>
             <button class="btn" onclick="appendToDisplay('.')">.</button>
             <button class="btn equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <div id="tutorial-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="tutorial-body">
+                </div>
+            <div class="modal-footer">
+                <button id="prev-step" class="nav-btn">⬅ Anterior</button>
+                <span id="step-indicator">1/5</span>
+                <button id="next-step" class="nav-btn">Próximo ➡</button>
+            </div>
         </div>
     </div>
 
